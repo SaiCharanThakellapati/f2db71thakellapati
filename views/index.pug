@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1(style="text-align:center;")= title
+  p(style="text-align:center;") Welcome to #{title}
+  p(style="text-align:center;") Thakellapati Sai Charan
+  b.
+  button(type='button' class="btn btn-light, btn btn-outline-warning" onclick="doBump()") Press Me
+  h2.
+  div(id='bump') Bump the count
+  c.
+  img(src='./images/download.jpg')
+  script.
+    let count=0;
+    let bump=1;
+    function doBump(){
+      count=bump+count;
+      bump+1;
+      document.getElementById('bump').innerHTML=`Count ${count}  bump ${bump}`;
+    }
+
