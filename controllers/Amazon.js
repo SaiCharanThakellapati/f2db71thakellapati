@@ -84,3 +84,16 @@ exports.Amazon_update_put = async function(req, res) {
         res.send(`{"error": ${err}}`); 
     }   
 }; 
+
+// VIEWS 
+// Handle a show all view 
+exports.Amazon_view_all_Page = async function(req, res) { 
+    try{ 
+        theAmazons = await Amazon.find(); 
+        res.render('Amazons', { title: 'Amazon Search Results', results: theAmazons }); 
+    } 
+    catch(err){ 
+        res.status(500); 
+        res.send(`{"error": ${err}}`); 
+    }   
+}; 

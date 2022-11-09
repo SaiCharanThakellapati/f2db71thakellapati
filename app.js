@@ -38,10 +38,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/Amazon', AmazonRouter);
+app.use('/Amazons', AmazonRouter);
 app.use('/gridbuild', gridbuildRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resourceRouter);
+
 
 // We can seed the collection if needed on server start 
 async function recreateDB() {
