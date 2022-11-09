@@ -4,6 +4,5 @@ const AmazonSchema = mongoose.Schema({
     quantity:Number,
     cost:Number,
 }) 
- 
 module.exports = mongoose.model("Amazon", 
 AmazonSchema)
