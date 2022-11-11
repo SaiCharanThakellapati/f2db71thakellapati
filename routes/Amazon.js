@@ -9,7 +9,8 @@ var router = express.Router();
 
 /* GET costumes */ 
 router.get('/', Amazon_controlers.Amazon_view_all_Page );
-
+// GET request for one costume. 
+router.get('/Amazons/:id', Amazon_controlers.Amazon_detail); 
 module.exports = router;
  
 
