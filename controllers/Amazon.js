@@ -65,7 +65,19 @@ exports.Amazon_create_post = async function(req, res) {
 exports.Amazon_delete = function(req, res) { 
     res.send('NOT IMPLEMENTED: Amazon delete DELETE ' + req.params.id); 
 }; 
-
+// Handle Amazon delete on DELETE. 
+exports.Amazon_delete = async function(req, res) { 
+    console.log("delete "  + req.params.id) 
+    try { 
+        result = await Amazon.findByIdAndDelete( req.params.id) 
+        console.log("Removed " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
+}; 
+ 
 // List of all Amazons 
 exports.Amazon_delete = async function(req, res) { 
     try{ 
@@ -78,6 +90,22 @@ exports.Amazon_delete = async function(req, res) {
     }   
 }; 
  
+
+// Handle Amazon delete on DELETE. 
+exports.Amazon_delete = async function(req, res) { 
+    console.log("delete "  + req.params.id) 
+    try { 
+        result = await Amazon.findByIdAndDelete( req.params.id) 
+        console.log("Removed " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
+}; 
+
+
+
 // Handle Amazon update form on PUT. 
 // exports.Amazon_update_put = function(req, res) { 
 //     res.send('NOT IMPLEMENTED: Amazon update PUT' + req.params.id); 
@@ -94,7 +122,6 @@ exports.Amazon_delete = async function(req, res) {
 //         res.send(`{"error": ${err}}`); 
 //     }   
 // }; 
-
 
 // Handle Amazon update form on PUT. 
 exports.Amazon_update_put = async function(req, res) { 
@@ -115,8 +142,59 @@ ${JSON.stringify(req.body)}`)
 failed`); 
     } 
 }; 
+//Handle building the view for updating a Amazon. 
+// query provides the id 
+exports.Amazon_update_Page =  async function(req, res) { 
+    console.log("update view for item "+req.query.id) 
+    try{ 
+        let result = await Amazon.findById(req.query.id) 
+        res.render('Amazonupdate', { title: 'Amazon Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+// Handle a delete one view with id from query 
+exports.Amazon_delete_Page = async function(req, res) { 
+    console.log("Delete view for id "  + req.query.id) 
+    try{ 
+        result = await Amazon.findById(req.query.id) 
+        res.render('Amazondelete', { title: 'Amazon Delete', toShow: 
+result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+// Handle building the view for creating a Amazon. 
+// No body, no in path parameter, no query. 
+// Does not need to be async 
+exports.Amazon_create_Page =  function(req, res) { 
+    console.log("create view") 
+    try{ 
+        res.render('Amazoncreate', { title: 'Amazon Create'}); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
 
-
+// Handle a show one view with id specified by query 
+exports.Amazon_view_one_Page = async function(req, res) { 
+    console.log("single view for id "  + req.query.id) 
+    try{ 
+        result = await Amazon.findById( req.query.id) 
+        res.render('Amazondetail',  
+{ title: 'Amazon Detail', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
 // VIEWS 
 // Handle a show all view 
 exports.Amazon_view_all_Page = async function(req, res) { 
