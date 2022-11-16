@@ -33,16 +33,16 @@ exports.Amazon_detail = async function(req, res) {
     } 
 }; 
 // List of all Amazons 
-// exports.Amazon_detail = async function(req, res) { 
-//     try{ 
-//         theAmazons = await Amazon.find(); 
-//         res.send(theAmazons); 
-//     } 
-//     catch(err){ 
-//         res.status(500); 
-//         res.send(`{"error": ${err}}`); 
-//     }   
-// }; 
+exports.Amazon_detail = async function(req, res) { 
+    try{ 
+        theAmazons = await Amazon.find(); 
+        res.send(theAmazons); 
+    } 
+    catch(err){ 
+        res.status(500); 
+        res.send(`{"error": ${err}}`); 
+    }   
+}; 
  
 // Handle Amazon create on POST. 
 exports.Amazon_create_post = function(req, res) { 
@@ -91,18 +91,6 @@ exports.Amazon_delete = async function(req, res) {
 }; 
  
 
-// Handle Amazon delete on DELETE. 
-exports.Amazon_delete = async function(req, res) { 
-    console.log("delete "  + req.params.id) 
-    try { 
-        result = await Amazon.findByIdAndDelete( req.params.id) 
-        console.log("Removed " + result) 
-        res.send(result) 
-    } catch (err) { 
-        res.status(500) 
-        res.send(`{"error": Error deleting ${err}}`); 
-    } 
-}; 
 
 
 

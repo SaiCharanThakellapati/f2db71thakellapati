@@ -2,18 +2,21 @@ extends layout
  
 block content 
   h1= title 
- 
-  form(id='AmazonForm', action="/resource/Amazons", method="POST") 
-    div.form-group 
+  
+  form(id='AmazonForm', action="/resource/Amazons", method="POST" ,class='d') 
+    div(class='d').form-group
+        img(src='/images/download.jpg')
+    div(class='d e').form-group 
         label.AmazonAttr(for='item') Amazon item
         input#item(type='text', name='item') 
-    div.form-group 
+    div(class='d e').form-group 
         label.AmazonAttr(for='quantity') Amazon quantity 
         input#quantity(type='text', name='quantity') 
-    div.form-group 
+    div(class='d e').form-group 
         label.AmazonAttr(for='cost') Amazon cost 
         input#cost(type='number', name='cost') 
     input(type="submit") 
+    
  
   script. 
     document.forms['AmazonForm'].addEventListener('submit', (event) => { 

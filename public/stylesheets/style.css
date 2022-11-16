@@ -10,10 +10,19 @@ a {
 b{
     padding-left: 545px;
 }
-c{
+.c{
   padding-left: 500px;
 }
 .AmazonAttr { 
-  background-color: aquamarine; 
+  background-color: rgb(246, 255, 127); 
   width: 120px; 
+  text-shadow: 2px 2px #00ffea ;
 } 
+.d {
+ text-align: center;
+ padding: 10px;
+ background-color: rgb(56, 237, 237);
+}
+.e {
+background-color: rgba(32, 237, 155, 0.863);
+}
