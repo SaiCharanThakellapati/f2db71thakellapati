@@ -1,22 +1,24 @@
 extends layout 
- 
+
 block content 
   h1= title 
- 
-  - let Amazonid = toShow._id 
-  - let item = toShow.item 
-  - let quantity = toShow.quantity
-  - let cost = toShow.cost
-  div 
-    div.row 
-      div(class='AmazonAttr mr-3') Amazon ID is: 
-      div #{Amazonid} 
-    div.row 
-      div(class='AmazonAttr mr-3') Amazon item is: 
-      div #{item} 
-    div.row 
-      div(class='AmazonAttr mr-3') Amazon quantity is: 
-      div #{quantity} 
-    div.row 
-      div(class='AmazonAttr mr-3') Amazon cost is: 
-      div #{cost} 
+  if (toShow == null) 
+    h2 No Details Available  
+  else
+    - let Amazonid = toShow._id 
+    - let item = toShow.item 
+    - let quantity = toShow.quantity
+    - let cost = toShow.cost
+    div 
+      div.row 
+        div(class='AmazonAttr mr-3') Amazon ID is: 
+        div #{Amazonid} 
+      div.row 
+        div(class='AmazonAttr mr-3') Amazon item is: 
+        div #{item} 
+      div.row 
+        div(class='AmazonAttr mr-3') Amazon quantity is: 
+        div #{quantity} 
+      div.row 
+        div(class='AmazonAttr mr-3') Amazon cost is: 
+        div #{cost} 

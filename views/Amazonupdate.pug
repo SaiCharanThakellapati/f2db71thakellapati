@@ -2,42 +2,46 @@ extends layout
  
 block content 
   h1= title 
- 
-  - let Amazonid = toShow._id 
-  - let item = toShow.item 
-  - let quantity = toShow.quantity
-  - let cost = toShow.cost
+  
+  if (toShow == null) 
+    h2 No instance to Update
+  else
+   - let Amazonid = toShow._id 
+   - let item= toShow.item
+   - let quantity = toShow.quantity
+   - let cost = toShow.cost
    
-  div.row(class='mb-2') 
-    div.mr-1 ID is 
-    div #{Amazonid} 
-  - let actionid = "/resource/Amazons/" + Amazonid 
-  form(id='AmazonForm', action= actionid, method="PUT") 
-    div.form-group 
-        label.AmazonAttr(for='item') Amazon item 
-        input#item(type='text', name='item', value= item ) 
-    div.form-group 
-        label.AmazonAttr(for='quantity') Amazon quantity
-        input#quantity(type='text', name='quantity', value= quantity ) 
-    div.form-group 
-        label.AmazonAttr(for='cost') Amazon cost 
-        input#cost(type='number', name='cost', value= cost) 
-    input(type="submit") 
+   div.row(class='mb-2') 
+     div.mr-1 ID is 
+     div #{Amazonid} 
+   - let actionid = "/resource/Amazons/" + Amazonid 
+   form(id='AmazonForm', action= actionid, method="PUT") 
+     div.form-group 
+         label.AmazonAttr(for='item') Amazon item
+         input#item(type='text', name='item', value= item ) 
+     div.form-group 
+         label.AmazonAttr(for='quantity') Amazon quantity
+         input#quantity(type='text', name='quantity', value= quantity ) 
+     div.form-group 
+         label.AmazonAttr(for='cost') Amazon cost
+         input#cost(type='number', name='cost', value= cost ) 
+     input(type="submit") 
  
-  script. 
-    document.forms['AmazonForm'].addEventListener('submit', (event) => { 
-      event.preventDefault(); 
-      // TODO do something here to show user that form is being submitted 
-      fetch(event.target.action, { 
-        method: 'PUT', 
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
-      }).then((resp) => { 
-        return resp.json(); // or resp.text() or whatever the server sends 
-      }).then((body) => { 
-        alert("Update succeded") 
-        // TODO handle body 
-      }).catch((error) => { 
-        // TODO handle error 
-        alert("Update failed " + error ) 
-      }); 
-    }); 
+   script. 
+     document.forms['AmazonForm'].addEventListener('submit', (event) => { 
+       event.preventDefault(); 
+       // TODO do something here to show user that form is being submitted 
+       fetch(event.target.action, { 
+         method: 'PUT', 
+         body: new URLSearchParams(new FormData(event.target)) 
+       }).then((resp) => { 
+         return resp.json(); // or resp.text() or whatever the server sends 
+       }).then((body) => { 
+         alert("Update succeded") 
+         // TODO handle body 
+       }).catch((error) => { 
+         // TODO handle error 
+         alert("Update failed " + error ) 
+       }); 
+     }); 
+ 
