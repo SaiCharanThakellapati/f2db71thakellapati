@@ -1,53 +1,63 @@
 extends layout
 block content
-    h1(style="text-align:center;")= title
-        p(style="text-align:center;") Welcome to #{title}
-        p(style="text-align:center;") Thakellapati Sai Charan
-    -let items = results
+  h1(style="text-align:center;")= title
+    p(style="text-align:center;") Welcome to #{title}
+    p(style="text-align:center;") Thakellapati Sai Charan
+  -let items = results
+  div(class="container-fluid") 
+  div(class="row m-1") 
+    each item in items  
+      - let destination = `dispatch(\"/Amazons/update?id=${item._id}\")`
+      div(class="row-sm-2" class="m-1") Item #{item.item}(#{item.quantity}) is #{item.cost} 
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
+  script. 
+    function dispatch(path){ 
+      window.location.href=path 
+    } 
 
-    button.btn( class="btn-success ml-1", onclick= `click(\"./Amazon/create\")` ) Create a new Item
-    table(class="table table-stripped table-bordered")
-        thead(style="background-color:lightgreen;color:white") 
-            tr
-                td Item ID
-                td Item item
-                td Item quantity
-                td Item cost 
-                td Inspect 
-                td Update
-                td Delete
-        tbody
-            
-            each item in items
-                tr
-                    td #{item._id}
-                    td #{item.item}
-                    td #{item.quantity}
-                    td #{item.cost}
-                    td 
-                      button.btn( class="btn-primary ml-1", onclick= `click(\"/Amazon/inspect/?id=${item._id}\")` ) Inspect
-                    td 
-                      button.btn( class="btn-primary ml-1", onclick= `click(\"/Amazon/update/?id=${item._id}\")` ) Update
-                    td 
-                      button.btn( class="btn-primary ml-1", onclick= `click(\"/Amazon/delete/?id=${item._id}\")` ) Delete 
-                script. 
-                  function click(path){ 
-                    window.location.href=path 
-                  } 
+  button.btn( class="btn-success ml-1", onclick= `click(\"./Amazon/create\")` ) Create a new Item
+  table(class="table table-stripped table-bordered")
+    thead(style="background-color:lightgreen;color:white") 
+      tr
+        td Item ID
+        td Item item
+        td Item quantity
+        td Item cost 
+        td Inspect 
+        td Update
+        td Delete
+    tbody
 
-    -let list =[{item:"Mobile Phone",quantity:1,cost:1200},{item:"Beats Earbuds",quantity:1,cost:12},{item:"ASUS TUF Gaming Laptop",quantity:1,cost:1700}]
-    div(class="container-fluid")
-    div(class="row")
-        each Amazon,index in list
-            table(style='width:100%')
-                tr
-                    div(class="col-sm-2" onclick=`buy(${index})`) #{Amazon.item}
-                    div(class="col-sm-2" onclick=`buy(${index})`) #{Amazon.quantity}
-                    div(class="col-sm-2" onclick=`buy(${index})`) #{Amazon.cost}
-        script.
-            function buy(item){
-                alert(`You Have choose Item:${item+1}`) 
-            } 
+      each item in items
+        tr
+          td #{item._id}
+          td #{item.item}
+          td #{item.quantity}
+          td #{item.cost}
+          td 
+            button.btn( class="btn-primary ml-1", onclick= `click(\"/Amazon/inspect/?id=${item._id}\")` ) Inspect
+          td 
+            button.btn( class="btn-primary ml-1", onclick= `click(\"/Amazon/update/?id=${item._id}\")` ) Update
+          td 
+            button.btn( class="btn-primary ml-1", onclick= `click(\"/Amazon/delete/?id=${item._id}\")` ) Delete 
+        script. 
+          function click(path){ 
+            window.location.href=path 
+          } 
+
+  -let list =[{item:"Mobile Phone",quantity:1,cost:1200},{item:"Beats Earbuds",quantity:1,cost:12},{item:"ASUS TUF Gaming Laptop",quantity:1,cost:1700}]
+  div(class="container-fluid")
+  div(class="row")
+    each Amazon,index in list
+      table(style='width:100%')
+        tr
+          div(class="col-sm-2" onclick=`buy(${index})`) #{Amazon.item}
+          div(class="col-sm-2" onclick=`buy(${index})`) #{Amazon.quantity}
+          div(class="col-sm-2" onclick=`buy(${index})`) #{Amazon.cost}
+    script.
+      function buy(item){
+        alert(`You Have choose Item:${item+1}`) 
+      } 
 
 
 
