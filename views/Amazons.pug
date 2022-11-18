@@ -15,7 +15,7 @@ block content
       window.location.href=path 
     } 
 
-  button.btn( class="btn-success ml-1", onclick= `click(\"./Amazon/create\")` ) Create a new Item
+  //button.btn( class="btn-success ml-1", onclick= `click(\"/Amazons/create\")` ) Create a new Item
   table(class="table table-stripped table-bordered")
     thead(style="background-color:lightgreen;color:white") 
       tr
@@ -23,25 +23,29 @@ block content
         td Item item
         td Item quantity
         td Item cost 
-        td Inspect 
-        td Update
-        td Delete
+        td Update 
+        //td Delete
+        //td Create
     tbody
 
       each item in items
+        - let destination = `dispatch(\"/Amazons/update?id=${item._id}\")`
+        //- - let destination = `dispatch(\"/Amazons/delete?id=${item._id}\")`
+        //- - let destination = `dispatch(\"/Amazons/create?id=${item._id}\")`
         tr
           td #{item._id}
           td #{item.item}
           td #{item.quantity}
           td #{item.cost}
           td 
-            button.btn( class="btn-primary ml-1", onclick= `click(\"/Amazon/inspect/?id=${item._id}\")` ) Inspect
-          td 
-            button.btn( class="btn-primary ml-1", onclick= `click(\"/Amazon/update/?id=${item._id}\")` ) Update
-          td 
-            button.btn( class="btn-primary ml-1", onclick= `click(\"/Amazon/delete/?id=${item._id}\")` ) Delete 
+            button.btn( class="btn-primary ml-1", onclick= destination) Update
+          //- td 
+          //-   button.btn( class="btn-primary ml-1", onclick= destination) delete
+          //- td 
+          //-   button.btn( class="btn-primary ml-1", onclick= destination) create 
+
         script. 
-          function click(path){ 
+          function destination(path){ 
             window.location.href=path 
           } 
 
