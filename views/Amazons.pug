@@ -1,5 +1,16 @@
 extends layout
 block content
+
+ if (!user)
+ a(href="/login") Login
+ br
+ a(href="/register") Register
+ if (user)
+ p You are currently logged in as #{user.username}
+ a(href="/Amazons") Take me to Amazons
+ br
+ a(href="/logout") Logout
+
   h1(style="text-align:center;")= title
     p(style="text-align:center;") Welcome to #{title}
     p(style="text-align:center;") Thakellapati Sai Charan
@@ -49,19 +60,19 @@ block content
             window.location.href=path 
           } 
 
-  -let list =[{item:"Mobile Phone",quantity:1,cost:1200},{item:"Beats Earbuds",quantity:1,cost:12},{item:"ASUS TUF Gaming Laptop",quantity:1,cost:1700}]
-  div(class="container-fluid")
-  div(class="row")
-    each Amazon,index in list
-      table(style='width:100%')
-        tr
-          div(class="col-sm-2" onclick=`buy(${index})`) #{Amazon.item}
-          div(class="col-sm-2" onclick=`buy(${index})`) #{Amazon.quantity}
-          div(class="col-sm-2" onclick=`buy(${index})`) #{Amazon.cost}
-    script.
-      function buy(item){
-        alert(`You Have choose Item:${item+1}`) 
-      } 
+  //- -let list =[{item:"Mobile Phone",quantity:1,cost:1200},{item:"Beats Earbuds",quantity:1,cost:12},{item:"ASUS TUF Gaming Laptop",quantity:1,cost:1700}]
+  //- div(class="container-fluid")
+  //- div(class="row")
+  //-   each Amazon,index in list
+  //-     table(style='width:100%')
+  //-       tr
+  //-         div(class="col-sm-2" onclick=`buy(${index})`) #{Amazon.item}
+  //-         div(class="col-sm-2" onclick=`buy(${index})`) #{Amazon.quantity}
+  //-         div(class="col-sm-2" onclick=`buy(${index})`) #{Amazon.cost}
+  //-   script.
+  //-     function buy(item){
+  //-       alert(`You Have choose Item:${item+1}`) 
+  //-     } 
 
 
 
