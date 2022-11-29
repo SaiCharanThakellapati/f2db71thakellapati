@@ -1,32 +1,30 @@
 extends layout
 block content
 
- if (!user)
- a(href="/login") Login
- br
- a(href="/register") Register
- if (user)
- p You are currently logged in as #{user.username}
- a(href="/Amazons") Take me to Amazons
- br
- a(href="/logout") Logout
-
   h1(style="text-align:center;")= title
-    p(style="text-align:center;") Welcome to #{title}
-    p(style="text-align:center;") Thakellapati Sai Charan
+   
   -let items = results
   div(class="container-fluid") 
   div(class="row m-1") 
     each item in items  
       - let destination = `dispatch(\"/Amazons/update?id=${item._id}\")`
-      div(class="row-sm-2" class="m-1") Item #{item.item}(#{item.quantity}) is #{item.cost} 
-        button.btn( class="btn-primary ml-1", onclick= destination) Update
+      - let destinationdelete = `dispatch(\"/Amazons/delete?id=${item._id}\")`
+      - let destinationdetail = `dispatch(\"/Amazons/detail?id=${item._id}\")`
+      div(class="row-sm-2 m-1") Item #{item.item}(#{item.quantity}) is #{item.cost} 
+        button.btn( class="btn-primary ml-1", onclick= destination) Update 
+        button.btn( class="btn-primary ml-1", onclick= destinationdelete) Delete
+        button.btn( class="btn-primary ml-1", onclick= destinationdetail) Detail
+
+
+        
   script. 
     function dispatch(path){ 
       window.location.href=path 
     } 
 
-  //button.btn( class="btn-success ml-1", onclick= `click(\"/Amazons/create\")` ) Create a new Item
+  - let destinationcreate = `dispatch(\"/Amazons/create\")`
+   button.btn( class="btn-success ml-1", onclick= destinationcreate) Create a new Item
+  
   table(class="table table-stripped table-bordered")
     thead(style="background-color:lightgreen;color:white") 
       tr
@@ -35,12 +33,14 @@ block content
         td Item quantity
         td Item cost 
         td Update 
-        //td Delete
-        //td Create
+        td Delete
+        td Detail
     tbody
 
       each item in items
         - let destination = `dispatch(\"/Amazons/update?id=${item._id}\")`
+        - let destinationdelete = `dispatch(\"/Amazons/delete?id=${item._id}\")`
+        - let destinationdetail = `dispatch(\"/Amazons/detail?id=${item._id}\")`
         //- - let destination = `dispatch(\"/Amazons/delete?id=${item._id}\")`
         //- - let destination = `dispatch(\"/Amazons/create?id=${item._id}\")`
         tr
@@ -49,11 +49,13 @@ block content
           td #{item.quantity}
           td #{item.cost}
           td 
-            button.btn( class="btn-primary ml-1", onclick= destination) Update
-          //- td 
-          //-   button.btn( class="btn-primary ml-1", onclick= destination) delete
-          //- td 
-          //-   button.btn( class="btn-primary ml-1", onclick= destination) create 
+            button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/Amazons/update?id=${item._id}\")`) Update
+            //button.btn( class="btn-primary ml-1", onclick= destinationdelete) Delete
+            //button.btn( class="btn-primary ml-1", onclick= destinationdetail) Detail
+          td 
+            button.btn( class="btn-primary ml-1", onclick= destinationdelete) Delete
+          td 
+            button.btn( class="btn-primary ml-1", onclick= destinationdetail) Detail
 
         script. 
           function destination(path){ 

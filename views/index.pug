@@ -1,17 +1,42 @@
 extends layout
 block content
-  h1(style="text-align:center;")= title
-  p(style="text-align:center;") Welcome to #{title}
-  p(style="text-align:center;") Thakellapati Sai Charan
   if (!user)
-    a(href="/login") Login
-    br
-    a(href="/register") Register
+   a(href="/login") Login
+   br
+   a(href="/register") Register
   if (user)
-    p You are currently logged in as #{user.username}
-    a(href="/Amazons") Take me to Amazons
-    br
-    a(href="/logout") Logout
+   p You are currently logged in as #{user.username}
+   a(href="/Amazons") Take me to Amazons
+   br
+   a(href="/logout") Logout
+  //- h1(style="text-align:center;")= title
+  //- p(style="text-align:center;") Welcome to #{title}
+  //- p(style="text-align:center;") Thakellapati Sai Charan
+    if (!user)
+        a(href="/login") Login
+        br
+        a(href="/register") Register
+    if (user)
+        p You are currently logged in as #{user.username}
+        a(href="/Amazons") Take me to Amazons
+        br
+        a(href="/logout") Logout
+
+
+//- extends layout
+//- block content
+//-   h1(style="text-align:center;")= title
+//-   p(style="text-align:center;") Welcome to #{title}
+//-   p(style="text-align:center;") Thakellapati Sai Charan
+//-   if (!user)
+//-     a(href="/login") Login
+//-     br
+//-     a(href="/register") Register
+//-   if (user)
+//-     p You are currently logged in as #{user.username}
+//-     a(href="/Amazons") Take me to Amazons
+//-     br
+//-     a(href="/logout") Logout
 
 
 //- extends layout

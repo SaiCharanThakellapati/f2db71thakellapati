@@ -4,8 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport'); 
-var LocalStrategy = require('passport-local').Strategy;
-
+var LocalStrategy = require('passport-local').Strategy; 
 passport.use(new LocalStrategy( 
   function(username, password, done) { 
     Account.findOne({ username: username }, function (err, user) { 
@@ -18,9 +17,7 @@ passport.use(new LocalStrategy(
       } 
       return done(null, user); 
     }); 
-  } 
-)); 
-
+  }));
 require('dotenv').config();
 const connectionString =
   process.env.MONGO_CON
@@ -31,16 +28,16 @@ mongoose.connect(connectionString,
     useUnifiedTopology: true
   });
 
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var AmazonRouter = require('./routes/Amazon');
 var gridbuildRouter = require('./routes/gridbuild');
 var selectorRouter = require('./routes/selector');
-var resourceRouter = require("./routes/resource");
-var Amazon = require("./models/Amazon");
-
+var resourceRouter = require('./routes/resource');
 var app = express();
-
+var Amazon = require("./models/Amazon");
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -56,8 +53,6 @@ app.use(require('express-session')({
 })); 
 app.use(passport.initialize()); 
 app.use(passport.session()); 
-
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -67,12 +62,9 @@ app.use('/gridbuild', gridbuildRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resourceRouter);
 
-
-// We can seed the collection if needed on server start 
 async function recreateDB() {
-  // Delete everything 
+  // Delete everything
   await Amazon.deleteMany();
-
   let instance1 = new
     Amazon({ item: "Mobile Phone", quantity: 1, cost: 1200 });
   instance1.save(function (err, doc) {
@@ -81,27 +73,30 @@ async function recreateDB() {
   });
 
   let instance2 = new
-    Amazon({ item:"Beats Earbuds",quantity:1,cost:12 });
+    Amazon({item:"Beats Earbuds",quantity:1,cost:12});
+
   instance2.save(function (err, doc) {
     if (err) return console.error(err);
     console.log("Second object saved")
   });
 
   let instance3 = new
-    Amazon({ item:"ASUS TUF Gaming Laptop",quantity:1,cost:1700 });
+    Amazon({item:"ASUS TUF Gaming Laptop",quantity:1,cost:1700 });
   instance3.save(function (err, doc) {
     if (err) return console.error(err);
     console.log("Third object saved")
   });
+
+
 }
-
 let reseed = true;
-if (reseed) { recreateDB(); }
-
+if (reseed) {
+  recreateDB();
+}
 // passport config 
 // Use the existing connection 
 // The Account model  
-var Account =require('./models/account'); 
+var Account =require('./models/Account'); 
  
 passport.use(new LocalStrategy(Account.authenticate())); 
 passport.serializeUser(Account.serializeUser()); 
